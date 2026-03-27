@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex Rivera — Dev Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ─────────────────────────────────────────
+        VARIABLES GLOBALES - DARK NEÓN MODE
+           ───────────────────────────────────────── */
+        :root {
+            --color-fondo:     #0a0a0b; 
+            --color-tarjeta:   #141417;
+            --color-texto:      #e0e0e0;
+            --color-acento:     #00f2ff; /* Neón Cian */
+            --color-acento2:    #7000ff; /* Neón Púrpura */
+            --color-gris:       #94a3b8;
+            --fuente-display:   'DM Serif Display', serif;
+            --fuente-cuerpo:    'DM Sans', sans-serif;
+            --radio:            16px;
+            --glow-texto:       0 0 8px rgba(0, 242, 255, 0.5);
+        }
+
+        /* RESET & BASE */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0; padding: 0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--fuente-cuerpo);
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Patrón de fondo sutil */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.02) 1px, transparent 0);
+            background-size: 32px 32px;
+            z-index: -1;
+        }
+
+        /* HEADER */
+        header {
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 0 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-family: var(--fuente-display);
+            font-size: 1.6rem;
+            text-shadow: var(--glow-texto);
+            color: #fff;
+        }
+        .logo span { color: var(--color-acento); }
+
+        nav a {
+            color: var(--color-gris);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-left: 2rem;
+            transition: 0.3s;
+        }
+        nav a:hover { color: var(--color-acento); text-shadow: var(--glow-texto); }
+
+        /* MAIN & HERO */
+        main { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; }
+
+        .hero { display: flex; gap: 4rem; align-items: center; margin-bottom: 6rem; }
+
+        .foto-wrapper img {
+            width: 200px; height: 200px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            object-fit: cover;
+            border: 2px solid var(--color-acento);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-texto h1 {
+            font-family: var(--fuente-display);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, var(--color-acento));
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-texto .subtitulo {
+            color: var(--color-acento);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* BOTONES */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        .btn-primario {
+            background: var(--color-acento);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+        }
+        .btn-secundario {
+            border: 1px solid var(--color-gris);
+            color: var(--color-texto);
+            margin-left: 1rem;
+        }
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.2); }
+
+        /* SECCIONES & CARDS */
+        .seccion { margin-bottom: 5rem; }
+        .seccion h2 { 
+            font-family: var(--fuente-display); 
+            font-size: 2rem; 
+            margin-bottom: 2.5rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 1rem;
+            color: #fff;
+        }
+        .seccion h2 .linea { width: 40px; height: 2px; background: var(--color-acento2); box-shadow: 0 0 10px var(--color-acento2); }
+
+        .grid-skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-card {
+            background: var(--color-tarjeta);
+            padding: 2rem 1rem;
+            border-radius: var(--radio);
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .skill-card:hover { 
+            border-color: var(--color-acento); 
+            transform: translateY(-8px);
+            background: rgba(0, 242, 255, 0.02);
+        }
+        .skill-card .icono { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+        .skill-card strong { display: block; font-size: 1rem; color: #fff; margin-bottom: 0.2rem; }
+        .skill-card span { font-size: 0.8rem; color: var(--color-gris); }
+
+        /* PROYECTOS & GLITCH EFFECT */
+        .proyecto {
+            background: var(--color-tarjeta);
+            padding: 2.5rem;
+            border-radius: var(--radio);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--color-acento2);
+            transition: 0.3s;
+            position: relative;
+        }
+        .proyecto:hover { transform: translateX(10px); background: #1a1a20; }
+        
+        .proyecto h3 { 
+            color: var(--color-acento); 
+            margin-bottom: 0.8rem; 
+            font-family: var(--fuente-display);
+            font-size: 1.5rem;
+            transition: 0.2s;
+        }
+        .proyecto:hover h3 {
+            text-shadow: 2px 0 var(--color-acento2), -2px 0 #ff0055;
+            animation: glitch 0.3s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .proyecto p { color: var(--color-gris); margin-bottom: 1.2rem; font-size: 0.95rem; }
+        .proyecto a { color: var(--color-acento2); text-decoration: none; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* CONTACTO */
+        .links-sociales { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+        .link-social {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            background: var(--color-tarjeta);
+            color: var(--color-texto);
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        .link-social:hover { background: var(--color-acento); color: #000; border-color: var(--color-acento); }
+
+        footer { padding: 4rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: var(--color-gris); font-size: 0.85rem; }
+
+        /* ANIMACIONES DE ENTRADA */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); filter: blur(4px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        .hero-texto, .foto-wrapper, .seccion, .proyecto, .skill-card {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .hero-texto { animation-delay: 0.1s; }
+        .foto-wrapper { animation-delay: 0.3s; }
+        #acerca { animation-delay: 0.5s; }
+        #habilidades { animation-delay: 0.6s; }
+        #proyectos { animation-delay: 0.7s; }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; gap: 2rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">alex<span>.</span>dev</div>
+    <nav>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero" id="sobre-mi">
+        <div class="foto-wrapper">
+            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Alex&backgroundColor=b6e3f4" alt="Alex Rivera" />
+        </div>
+        <div class="hero-texto">
+            <p class="subtitulo">Desarrollador Web · Santa Fe</p>
+            <h1>Hola, soy<br/>Alex Rivera</h1>
+            <p style="color: var(--color-gris); margin-bottom: 2.5rem; max-width: 500px;">
+                Apasionado por construir experiencias digitales que brillan. Me especializo en front-end moderno con un toque de identidad propia y diseño minimalista.
+            </p>
+            <a href="#proyectos" class="btn btn-primario">Ver proyectos</a>
+            <a href="#contacto" class="btn btn-secundario">Contacto</a>
+        </div>
+    </section>
+
+    <section class="seccion" id="acerca">
+        <h2><span class="linea"></span> Un poco más sobre mí</h2>
+        <p>Empecé a programar de forma autodidacta hace tres años, movido por la curiosidad de entender el código. Hoy soy freelance y disfruto creando soluciones visuales impactantes y funcionales.</p>
+        <p style="margin-top: 1rem;">Cuando no estoy programando, suelo perderme en librerías o experimentar con nuevas recetas.</p>
+    </section>
+
+    <section class="seccion" id="habilidades">
+        <h2><span class="linea"></span> Habilidades</h2>
+        <div class="grid-skills">
+            <div class="skill-card">
+                <span class="icono">🌐</span>
+                <strong>HTML & CSS</strong>
+                <span>Semántica y diseño</span>
+            </div>
+            <div class="skill-card">
+                <span class="icono">⚡</span>
+                <strong>JavaScript</strong>
+                <span>ES6+, DOM, Fetch</span>
+            </div>
+            <div class="skill-card">
+                <span class="icono">⚛️</span>
+                <strong>React</strong>
+                <span>Componentes & hooks</span>
+            </div>
+            <div class="skill-card">
+                <span class="icono">🎨</span>
+                <strong>Figma</strong>
+                <span>Diseño UI / UX</span>
+            </div>
+            <div class="skill-card">
+                <span class="icono">🐙</span>
+                <strong>Git & GitHub</strong>
+                <span>Control de versiones</span>
+            </div>
+            <div class="skill-card">
+                <span class="icono">📱</span>
+                <strong>Responsive</strong>
+                <span>Mobile-first</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="seccion" id="proyectos">
+        <h2><span class="linea"></span> Proyectos</h2>
+
+        <div class="proyecto">
+            <h3>🛒 TiendaLocal</h3>
+            <p>Catálogo online para una tienda de productos artesanales. Construido con HTML, CSS y JavaScript vanilla.</p>
+            <a href="#" target="_blank">Ver proyecto →</a>
+        </div>
+
+        <div class="proyecto">
+            <h3>🌤️ ClimaYa</h3>
+            <p>App del clima que consume una API pública y muestra el pronóstico de la semana con íconos animados.</p>
+            <a href="#" target="_blank">Ver proyecto →</a>
+        </div>
+
+        <div class="proyecto">
+            <h3>📓 DevNotes</h3>
+            <p>Bloc de notas para developers con soporte de Markdown, etiquetas y almacenamiento local.</p>
+            <a href="#" target="_blank">Ver proyecto →</a>
+        </div>
+    </section>
+
+    <section class="seccion" id="contacto">
+        <h2><span class="linea"></span> Encontranos en</h2>
+        <p>¿Tenés un proyecto en mente? Escribime, siempre estoy abierto a nuevas ideas y colaboraciones.</p>
+        <div class="links-sociales">
+            <a href="mailto:alex@ejemplo.com" class="link-social">✉️ Email</a>
+            <a href="https://github.com" target="_blank" class="link-social">🐙 GitHub</a>
+            <a href="https://linkedin.com" target="_blank" class="link-social">💼 LinkedIn</a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>Hecho con ❤️ por Alex Rivera · 2026</p>
+</footer>
+
+</body>
+</html>
